@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>あなたが辞めるのは"性格"か"職場"か診断</title>
+  <meta name="description" content="福祉職向け。14問で16タイプ判定。性格と職場のミスマッチを可視化します。">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ===== LP ===== -->
+  <div id="page-lp" class="page active">
+    <div class="lp-container">
+      <div class="lp-eyebrow">福祉職向け 無料診断</div>
+      <h1 class="lp-title">
+        あなたが辞めるのは<br>
+        <em class="lp-title-em">"性格"</em>か<br>
+        <em class="lp-title-em">"職場"</em>か診断
+      </h1>
+      <div class="lp-body">
+        <p class="lp-copy">
+          福祉の仕事でつらくなる理由は<br>
+          「<strong>あなたの問題</strong>」ではありません
+        </p>
+        <p class="lp-em">多くは "性格と職場のミスマッチ" です</p>
+      </div>
+      <div class="lp-stats">
+        <div class="stat">
+          <div class="stat-n">14問</div>
+          <div class="stat-l">の質問</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">約1分</div>
+          <div class="stat-l">で完了</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">16</div>
+          <div class="stat-l">タイプ判定</div>
+        </div>
+      </div>
+      <button class="btn-start" onclick="startQuiz()">
+        今すぐ診断する <span class="btn-arrow">→</span>
+      </button>
+      <p class="lp-note">無料・登録不要</p>
+    </div>
+  </div>
+
+  <!-- ===== QUIZ ===== -->
+  <div id="page-quiz" class="page">
+    <div class="quiz-header">
+      <button class="btn-back" id="btn-back" onclick="goBack()">← 戻る</button>
+      <div class="prog-wrap">
+        <div class="prog-bar">
+          <div class="prog-fill" id="prog-fill"></div>
+        </div>
+        <div class="prog-text" id="prog-text">1 / 14</div>
+      </div>
+    </div>
+    <div class="quiz-body" id="quiz-body">
+      <div class="q-num-label" id="q-num">Q1</div>
+      <p class="q-text" id="q-text"></p>
+      <div class="choice-wrap">
+        <button class="choice-btn" onclick="answer('A')">
+          <span class="choice-label">A</span>
+          <span class="choice-text" id="choice-a"></span>
+        </button>
+        <div class="choice-or">or</div>
+        <button class="choice-btn" onclick="answer('B')">
+          <span class="choice-label">B</span>
+          <span class="choice-text" id="choice-b"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== RESULT ===== -->
+  <div id="page-result" class="page">
+    <div class="result-container">
+
+      <div class="result-hero">
+        <div class="hero-archetype" id="r-archetype"></div>
+        <div class="hero-type-name" id="r-typename"></div>
+        <div class="hero-sub" id="r-sub"></div>
+      </div>
+
+      <div class="risk-row">
+        <span class="risk-lbl">離職リスク</span>
+        <span class="risk-badge" id="r-risk"></span>
+      </div>
+
+      <div class="info-card">
+        <div class="info-ttl">辞める理由</div>
+        <div class="info-body" id="r-reason"></div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-ttl">このままだと</div>
+        <ul class="info-list" id="r-risks"></ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-ttl">回避方法</div>
+        <ul class="info-list" id="r-tips"></ul>
+      </div>
+
+      <div class="axes-card">
+        <div class="axes-ttl">Tendency Axes</div>
+        <div class="ax-row">
+          <span class="ax-l">共感</span>
+          <div class="ax-track"><div class="ax-fill" id="ax-empathy"></div></div>
+          <span class="ax-r">分析</span>
+        </div>
+        <div class="ax-row">
+          <span class="ax-l">現場</span>
+          <div class="ax-track"><div class="ax-fill" id="ax-field"></div></div>
+          <span class="ax-r">管理</span>
+        </div>
+        <div class="ax-row">
+          <span class="ax-l">安定</span>
+          <div class="ax-track"><div class="ax-fill" id="ax-stable"></div></div>
+          <span class="ax-r">変化</span>
+        </div>
+        <div class="ax-row">
+          <span class="ax-l">個人</span>
+          <div class="ax-track"><div class="ax-fill" id="ax-solo"></div></div>
+          <span class="ax-r">チーム</span>
+        </div>
+      </div>
+
+      <div class="note-band">
+        <p class="note-lead">あなたのタイプの詳しい解説はこちら</p>
+        <a href="#" class="btn-note" id="btn-note" target="_blank">📝 noteで読む</a>
+      </div>
+
+      <div class="share-card">
+        <div class="share-ttl">Share</div>
+        <div class="share-row">
+          <button class="btn-sh btn-sh-x" onclick="shareX()">𝕏 シェア</button>
+          <button class="btn-sh btn-sh-cp" onclick="copyResult()" id="btn-copy">📋 コピー</button>
+        </div>
+      </div>
+
+      <button class="btn-retry" onclick="retryQuiz()">もう一度診断する</button>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
