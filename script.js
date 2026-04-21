@@ -283,7 +283,7 @@ function setBar(id, ratio){
 function buildText(){
   const { typeKey } = calcType();
   const t = TYPES[typeKey] || TYPES['AAAA'];
-  return `【福祉職向け診断】\n私のタイプは「${t.name}」でした！\n原型：${t.archetype}\n\nあなたが辞めるのは"性格"か"職場"か診断\nhttps://note.com/`;
+  return `【福祉職向け診断】\n私のタイプは「${t.name}」でした！\n原型：${t.archetype}\n\nあなたが辞めるのは"性格"か"職場"か診断\nhttps://fukushi-app.github.io/fukushi-shindan/\n\n#福祉職診断 #福祉職 #介護職`;
 }
 
 function shareX(){
